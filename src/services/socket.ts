@@ -1,5 +1,6 @@
 import { io, Socket } from 'socket.io-client'
 import type { Message } from '@/types'
+import { useAuthStore } from '@/store/authStore'
 
 const SOCKET_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:3000'
 
@@ -13,7 +14,16 @@ export function getSocket(): Socket {
 }
 
 export function connectSocket() {
-  getSocket().connect()
+  const { token } = useAuthStore.getState()
+  if (socket) {
+    socket.disconnect()
+    socket = null
+  }
+  socket = io(SOCKET_URL, {
+    autoConnect: false,
+    auth: { token: token ?? '' },
+  })
+  socket.connect()
 }
 
 export function disconnectSocket() {

@@ -47,7 +47,7 @@ export function RegisterForm() {
     : null
 
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md shadow-xl border-slate-100">
       <CardHeader className="space-y-1">
         <CardTitle className="text-2xl">Create an account</CardTitle>
         <CardDescription>Start your learning journey today</CardDescription>
