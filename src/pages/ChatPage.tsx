@@ -288,9 +288,8 @@ function ChatWindow({
   onSend: (content: string) => void
 }) {
   const activeConversationId = useChatStore((s) => s.activeConversationId)
-  const messages = useChatStore((s) =>
-    activeConversationId ? (s.messages[activeConversationId] ?? []) : [],
-  )
+  const messagesMap = useChatStore((s) => s.messages)
+  const messages = activeConversationId ? messagesMap[activeConversationId] ?? [] : []
   const { isLoading: isLoadingMessages } = useConversationMessages(activeConversationId)
   const bottomRef = useRef<HTMLDivElement>(null)
 

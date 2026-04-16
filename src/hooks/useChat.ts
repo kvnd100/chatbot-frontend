@@ -25,7 +25,7 @@ export function useCreateConversation() {
   const setActiveConversation = useChatStore((s) => s.setActiveConversation)
 
   return useMutation({
-    mutationFn: (title?: string) => chatService.createConversation(title),
+    mutationFn: (title?: string) => chatService.createConversation(title?.trim() || "New conversation"),
     onSuccess: (conv) => {
       queryClient.invalidateQueries({ queryKey: ['conversations'] })
       setActiveConversation(conv.id)
